@@ -11,7 +11,7 @@
 <body>
 <div class="container" id="container">
     <div class="form-container sign-in-container">
-        <form action="{{route('login')}}" method="POST">
+        <form action="{{route('company.login')}}" method="POST">
             @csrf
             <h1>Sign in</h1>
             <div class="social-container">
@@ -30,20 +30,6 @@
             @enderror
             <button type="submit" name="login">Se Connecter</button>
         </form>
-    </div>
-    <div class="overlay-container">
-        <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button class="ghost" id="signIn">Sign In</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start the journey with us</p>
-                <button class="ghost" id="signUp">Sign Up</button>
-            </div>
-        </div>
     </div>
 </div>
 </body>

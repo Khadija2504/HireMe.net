@@ -1,52 +1,57 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in/up Form</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    <link rel="stylesheet" href="../../css/style.css">
+    
+</head> 
+<body>
+<div class="container" id="container">
+        <form action="{{route('company.register.create')}}" method="POST">
+            @csrf
+            <h1>Create Account</h1>
+            <div class="flex_div">
+                <input type="text" name="nom" placeholder="nom" required>
+                @error('nom')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+                <input type="email" name="email" placeholder="Email" required>
+                @error('email')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+            </div>
+                <input type="text" name="adresse" placeholder="Adresse" required>
+                @error('adresse')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+                <input type="text" name="description" placeholder="give us an idea about your company" required>
+                @error('description')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+            <div class="flex_div">
+                <input type="text" name="slogan" placeholder="chose your slogan" required>
+                @error('slogan')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+                <input type="text" name="industrie" placeholder="industrie" required>
+                @error('industreie')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+            </div>
+                <input type="password" name="password" placeholder="Mot de passe" required>
+                @error('password')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+                {{-- <input type="password" name="password" placeholder="Mot de passe autre foi" required> --}}
+                {{-- @error('password')
+                    <p class="error">{{ $message }}</p>
+                @enderror --}}
+                <button type="submit" name="register">S'inscrire</button>
+        </form>
+</div>
+<script  src="../../js/script.js"></script>
+</body>
+</html>

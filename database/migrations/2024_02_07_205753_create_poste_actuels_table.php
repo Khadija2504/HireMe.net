@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('poste_actuel', function (Blueprint $table) {
+        Schema::create('poste_actuels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_OffreDemploi')->constrained('OffreDemplois');
+            $table->foreignId('id_OffreDemploi')->constrained('offre_demplois');
             $table->string('poste_actuel_message');
             $table->timestamp('created_at')->nullable();
         });

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('poste_actuel_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->constrained('users');
-            $table->foreignId('poste_actuel_id')->constrained('poste_actuel');
+            $table->foreignId('poste_actuel_id')->constrained('poste_actuels');
             $table->timestamps();
         });
     }
