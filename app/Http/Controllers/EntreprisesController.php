@@ -17,23 +17,19 @@ class EntreprisesController extends Controller
         return view('auth.login');
     }
     public function dashboard(){
-        return view('company.dashboard');
+        return view('dashboard');
     }
     public function login(EntrepriseRequest $request)
 {
     $credentials = $request->only('email', 'password');
 
     if (Auth::guard('entreprise')->attempt($credentials)) {
+        // dd(Auth::guard('entreprise'));
         return redirect()->route('company.dashboard');
     }
-
+    
     return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
 
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
-
-        // return redirect()->intended(RouteServiceProvider::HOME);
     }
     public function companyLogout(){
         Auth::guard('entreprise')->logout();
@@ -43,7 +39,7 @@ class EntreprisesController extends Controller
     public function companyRegister(){
         return view('auth.register');
     }
-    
+
     public function companyRegisterCreate(registerCompanyRequest $request){
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);

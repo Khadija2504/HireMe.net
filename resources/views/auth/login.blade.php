@@ -11,7 +11,7 @@
 <body>
 <div class="container" id="container">
     <div class="form-container sign-in-container">
-        <form action="{{route('company.login')}}" method="POST">
+        <form action="{{route('company.login')}}" method="post">
             @csrf
             <h1>Sign in</h1>
             <div class="social-container">

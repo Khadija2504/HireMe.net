@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as AuthenticatableUser;
 
-class entreprises extends Model
+class entreprises extends AuthenticatableUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,8 +17,6 @@ class entreprises extends Model
      *
      * @var array<int, string>
      */
-
-    protected $guard = 'entreprise';
     protected $fillable = [
             'nom',
             'adresse',
