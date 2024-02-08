@@ -20,9 +20,13 @@ class entreprises extends Model
 
     protected $guard = 'entreprise';
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nom' => 'required|string|max:255',
+            'adresse',
+            'email',
+            'description',
+            'slogan',
+            'industrie',
+            'password',
     ];
 
     /**

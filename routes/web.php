@@ -17,17 +17,22 @@ use Illuminate\Support\Facades\Route;
 
 /* ------ company's route -------*/
 Route::prefix('entreprise')->group(function(){
-    Route::get('login',[EntreprisesController::class,'index'])
+    Route::get('/login',[EntreprisesController::class,'index'])
     ->name('login_form');
 
-    Route::get('login/owner',[EntreprisesController::class,'login'])
+    Route::post('/login/owner',[EntreprisesController::class,'login'])
     ->name('company.login');
 
-    Route::get('dashboard',[EntreprisesController::class,'dashboard'])
+    Route::get('/dashboard',[EntreprisesController::class,'dashboard'])
     ->name('company.dashboard')->middleware('entreprise');
 
-    Route::get('logout',[EntreprisesController::class,'companyLogout'])
+    Route::get('/logout',[EntreprisesController::class,'companyLogout'])
     ->name('company.logout')->middleware('entreprise');
+
+    Route::get('/register',[EntreprisesController::class,'companyRegister'])
+    ->name('company.register');
+    Route::post('/register/create',[EntreprisesController::class,'companyRegisterCreate'])
+    ->name('company.register.create');
 });
 
 

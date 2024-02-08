@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\registerCompanyRequest;
 use App\Models\entreprises;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 
 class EntreprisesController extends Controller
 {
@@ -31,73 +32,16 @@ class EntreprisesController extends Controller
         return redirect()->route('login_form');
     }
 
-    public function register(){
+    public function companyRegister(){
         return view('auth.register');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function companyRegisterCreate(registerCompanyRequest $request){
+        $validated = $request->validated();
+        $validated['password'] = Hash::make($validated['password']);
+        entreprises::create($validated);
+        return redirect()->route('auth');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\entreprises  $entreprises
-     * @return \Illuminate\Http\Response
-     */
-    public function show(entreprises $entreprises)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\entreprises  $entreprises
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(entreprises $entreprises)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\entreprises  $entreprises
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, entreprises $entreprises)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\entreprises  $entreprises
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(entreprises $entreprises)
-    {
-        //
-    }
 }
