@@ -17,6 +17,8 @@ class entreprises extends AuthenticatableUser
      *
      * @var array<int, string>
      */
+
+     protected $guard = 'entreprise';
     protected $fillable = [
             'nom',
             'adresse',
