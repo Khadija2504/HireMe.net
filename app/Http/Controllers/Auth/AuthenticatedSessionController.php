@@ -48,6 +48,11 @@ class AuthenticatedSessionController extends Controller
 
     }
 
+    public function userLogout(){
+        Auth::guard('web')->logout();
+        return redirect()->route('login_form');
+    }
+
     public function userRegisterCreate(registerUserRequest $request ){
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);

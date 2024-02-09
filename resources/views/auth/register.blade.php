@@ -56,6 +56,10 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
+                <input type="file" name="photo" placeholder="Chose your photo profile" required>
+                @error('photo')
+                    <p class="error">{{ $message }}</p>
+                @enderror
                 <input type="password" name="password" placeholder="Mot de passe" required>
                 @error('password')
                     <p class="error">{{ $message }}</p>
@@ -95,6 +99,10 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
+                <input type="file" name="photo" placeholder="Chose your photo profile" required>
+                @error('photo')
+                    <p class="error">{{ $message }}</p>
+                @enderror
                 <input type="password" name="password" placeholder="Mot de passe" required>
                 @error('password')
                     <p class="error">{{ $message }}</p>

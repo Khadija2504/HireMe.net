@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('prenom');
             $table->integer('age');
             $table->enum('role', ['admin', 'user'])->default('user');
-            $table->string('photo')->nullable();
+            $table->string('photo');
             $table->string('adresse');
             $table->string('contact_information');
             $table->string('about_me');

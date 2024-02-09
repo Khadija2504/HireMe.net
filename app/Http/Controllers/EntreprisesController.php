@@ -33,14 +33,12 @@ class EntreprisesController extends Controller
 
     if (Auth::guard('entreprise')->attempt($credentials)) {
         return redirect()->route('company.dashboard');
-    // } else 
-    // if(Auth::guard('web')->attempt($loginUserRequest)) 
-    // {
-    //     dd(Auth::guard('web'));
-    //     return redirect()->route('user.dashboard');
+    }
+    if (Auth::guard('entreprise')->check()) {
+        session(['company_id' => Auth::guard('entreprise')->id()]);
     }
     
-    // return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
+    return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
 
     }
     public function companyLogout(){
@@ -59,7 +57,25 @@ class EntreprisesController extends Controller
     public function companyRegister(){
         return view('auth.register');
     }
+    
+    public function edit(){
 
+        if (Auth::guard('entreprise')->check()) {
+            session(['company_id' => Auth::guard('entreprise')->id()]);
+        }
+            $entreprisesId = session('company_id');
+            if(!isset($entreprisesId)){
+                
+                return redirect()->route('login_form');
+            }
+            $entreprisess = entreprises::where('id', $entreprisesId)->get();
+            $entreprises = entreprises::find($entreprisesId);
+
+            return view('profile.edit',compact('entreprisess','entreprises'));
+    }
+    public function updateProfile(Request $request){
+        dd($request);
+    }
     public function companyRegisterCreate(registerCompanyRequest $request){
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);

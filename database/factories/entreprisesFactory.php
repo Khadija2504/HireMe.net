@@ -23,6 +23,7 @@ class EntrepriseFactory extends Factory
             'description' => fake()->paragraph(),
             'slogan' => fake()->jobTitle(),
             'industrie' => fake()->jobTitle(),
+            'photo' => fake()->filePath(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ];
     }

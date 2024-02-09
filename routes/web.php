@@ -64,8 +64,9 @@ Route::prefix('auth')->group(function () {
     Route::post('/register/create',[AuthenticatedSessionController::class,'userRegisterCreate'])
     ->name('user.register.create');
 
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile/update',[EntreprisesController::class,'updateProfile'])
+->name('updateProfile');
+    Route::get('/profile', [EntreprisesController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

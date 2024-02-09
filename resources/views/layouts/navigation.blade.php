@@ -27,7 +27,7 @@
                     <li class="mr-6"><a href="#" @click="open = true" class=""> Ajouter service</a></li>
                     </div>
                     <li class="mr-6"><a href="/myService">votre services</a></li> {{-- as ->popup --}}
-                    <li class="mr-6"><a href="/modifyProfile">Profile</a></li>
+                    <li class="mr-6"><a href="{{route('profile.edit')}}">Profile</a></li>
                     <li class="mr-6"><a href="{{route('company.logout')}}">Logout</a></li>
                 </ul>
             </div>

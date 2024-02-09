@@ -28,6 +28,7 @@ class User extends Authenticatable
         'titre',
         'industrie',
         'about_me',
+        'photo',
         'email',
         'password',
     ];

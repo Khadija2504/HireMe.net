@@ -33,6 +33,7 @@ class registerUserRequest extends FormRequest
             'about_me' => 'required|max:255',
             'titre' => 'required|max:255',
             'industrie' => 'required|max:255',
+            'photo' => 'required',
             'password' => 'required|string|min:4',
         ];
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('email');
-            $table->binary('photo')->nullable();
+            $table->string('photo');
             $table->string('adresse');
             $table->string('role')->default('company');
             $table->string('slogan');
