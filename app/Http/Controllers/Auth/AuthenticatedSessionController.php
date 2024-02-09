@@ -36,7 +36,12 @@ class AuthenticatedSessionController extends Controller
         $credentials = $request->only('email', 'password');
 
     if (Auth::guard('web')->attempt($credentials)) {
-        return redirect()->route('user.dashboard');
+        if(Auth::user()->role == 'admin') {
+            return redirect()->route('user.dashboard');
+        }else {
+            return redirect()->route('welcome');
+        }
+        
 
     }
     
