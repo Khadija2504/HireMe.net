@@ -36,13 +36,12 @@ class AuthenticatedSessionController extends Controller
         $credentials = $request->only('email', 'password');
 
     if (Auth::guard('web')->attempt($credentials)) {
-        if(Auth::user()->role == 'admin') {
+        if(Auth::user()->role == 'user') {
             return redirect()->route('user.dashboard');
         }else {
             return redirect()->route('welcome');
         }
         
-
     }
     
     return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
