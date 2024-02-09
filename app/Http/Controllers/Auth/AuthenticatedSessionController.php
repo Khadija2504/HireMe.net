@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\registerUserRequest;
+use App\Models\entreprises;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -20,16 +24,31 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+    public function dashboard(){
+        return view('home');
+    }
+
     /**
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->only('email', 'password');
 
-        $request->session()->regenerate();
+    if (Auth::guard('web')->attempt($credentials)) {
+        return redirect()->route('user.dashboard');
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+    }
+    
+    return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
+
+    }
+
+    public function userRegisterCreate(registerUserRequest $request ){
+        $validated = $request->validated();
+        $validated['password'] = Hash::make($validated['password']);
+        User::create($validated);
+        return redirect()->route('login');
     }
 
     /**

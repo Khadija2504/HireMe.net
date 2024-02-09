@@ -26,9 +26,9 @@ class registerUserRequest extends FormRequest
         return [
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'adresse' => 'required|numeric|digits:10',
+            'adresse' => 'required|string|max:255',
             'contact_information'=>'required|max:255|',
-            'age' => 'required|numeric|max:99',
+            'age' => 'required|string|max:99',
             'email' => 'required|email|unique:users',
             'about_me' => 'required|max:255',
             'titre' => 'required|max:255',

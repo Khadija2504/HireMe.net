@@ -27,6 +27,9 @@ Route::prefix('entreprise')->group(function(){
     Route::get('/dashboard',[EntreprisesController::class,'dashboard'])
     ->name('company.dashboard')->middleware('entreprise');
 
+    Route::get('/home',[EntreprisesController::class,'home'])
+    ->name('user.dashboard')->middleware('auth');
+
     Route::get('/logout',[EntreprisesController::class,'companyLogout'])
     ->name('company.logout')->middleware('entreprise');
 
@@ -43,30 +46,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    
+Route::prefix('auth')->group(function () {
 
-    Route::get('/login',[AuthenticatedSessionController::class,'index'])
-    ->name('login_form');
+    Route::post('/login/store',[AuthenticatedSessionController::class,'store'])
+    ->name('loginUser');
 
-    Route::post('/login/owner',[AuthenticatedSessionController::class,'login'])
-    ->name('company.login');
+    Route::get('/user/dashboard',[AuthenticatedSessionController::class,'dashboard'])
+    ->name('user.dashboard')->middleware('auth');
 
-    Route::get('/dashboard',[AuthenticatedSessionController::class,'dashboard'])
-    ->name('company.dashboard')->middleware('entreprise');
+    Route::get('/logout',[AuthenticatedSessionController::class,'userLogout'])
+    ->name('user.logout')->middleware('auth');
 
-    Route::get('/logout',[AuthenticatedSessionController::class,'companyLogout'])
-    ->name('company.logout')->middleware('entreprise');
-
-    Route::get('/register',[AuthenticatedSessionController::class,'companyRegister'])
-    ->name('company.register');
-    Route::post('/register/create',[AuthenticatedSessionController::class,'companyRegisterCreate'])
-    ->name('company.register.create');
-
+    Route::post('/register/create',[AuthenticatedSessionController::class,'userRegisterCreate'])
+    ->name('user.register.create');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
