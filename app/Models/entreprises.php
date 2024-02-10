@@ -26,7 +26,7 @@ class entreprises extends AuthenticatableUser
             'description',
             'slogan',
             'industrie',
-            'photo',
+            'path',
             'password',
     ];
 

@@ -11,7 +11,7 @@
 <body>
 <div class="container" id="container">
     <div class="form-container sign-in-container">
-        <form action="{{route('user.register.create')}}" method="POST">
+        <form action="{{route('user.register.create')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <h1>Create Account</h1>
             <div class="flex_div">
@@ -34,10 +34,6 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
-                <input type="text" name="adresse" placeholder="Adresse" required>
-                @error('adresse')
-                    <p class="error">{{ $message }}</p>
-                @enderror
                 <input type="text" name="contact_information" placeholder="contact informations" required>
                 @error('contact_information')
                     <p class="error">{{ $message }}</p>
@@ -56,19 +52,26 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="flex_div">
+                <input type="text" name="adresse" placeholder="Adresse" required>
+                @error('adresse')
+                    <p class="error">{{ $message }}</p>
+                @enderror
                 <input type="file" name="photo" placeholder="Chose your photo profile" required>
                 @error('photo')
                     <p class="error">{{ $message }}</p>
                 @enderror
+            </div>
                 <input type="password" name="password" placeholder="Mot de passe" required>
                 @error('password')
                     <p class="error">{{ $message }}</p>
                 @enderror
-                <button type="submit" name="register">S'inscrire</button>
+                <button type="submit" style="margin-top: 0" name="register">S'inscrire</button>
+        <div style="margin-top: 20px">Already have an account? <a href="{{ route('login') }}">Log in</a></div>
         </form>
     </div>
     <div class="form-container sign-up-container">
-        <form action="{{route('company.register.create')}}" method="POST">
+        <form action="{{route('company.register.create')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <h1>Create Account</h1>
             <div class="flex_div">
@@ -107,7 +110,9 @@
                 @error('password')
                     <p class="error">{{ $message }}</p>
                 @enderror
-                <button type="submit" name="register">S'inscrire</button>
+                <button type="submit" style="margin-top: 0" name="register">S'inscrire</button>
+            <div style="margin-top: 20px">Already have an account? <a href="{{ route('login') }}">Log in</a></div>
+
         </form>
     </div>
     <div class="overlay-container">

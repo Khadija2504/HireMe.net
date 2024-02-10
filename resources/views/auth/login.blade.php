@@ -28,8 +28,7 @@
             @error('password')
                 <p class="error">{{ $message }}</p>
             @enderror
-            <button type="submit" name="login">Se Connecter</button>
-            <div class="flex items-center justify-end mt-4">
+            <div style="margin-top: 15px; margin-button: 15px">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
@@ -37,6 +36,10 @@
                 @endif
     
             </div>
+            <button type="submit" name="login">Se Connecter</button>
+
+            <div style="margin-top: 15px">Already have an account? <a href="{{ route('register') }}">Sign up</a></div>
+
         </form>
     </div>
     <div class="form-container sign-up-container">
@@ -57,8 +60,7 @@
             @error('password')
                 <p class="error">{{ $message }}</p>
             @enderror
-            <button type="submit" name="login">Se Connecter</button>
-            <div class="flex items-center justify-end mt-4">
+            <div style="margin-top: 15px; margin-button: 15px">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
@@ -66,6 +68,10 @@
                 @endif
     
             </div>
+            <button type="submit" name="login">Se Connecter</button>
+            
+            <div style="margin-top: 15px;">Already have an account? <a href="{{ route('register') }}">Sign up</a></div>
+
         </form>
     </div>
     <div class="overlay-container">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,29 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    public function updateProfile(Request $request){
+        if (Auth::guard('web')->check()) {
+            session(['user_id' => Auth::guard('web')->id()]);
+        }
+            $userId = session('user_id');
+            if(!isset($userId)){
+                
+                return redirect()->route('login_form');
+            }
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $file_extension = $file->getClientOriginalExtension();
+                $file_name = time() . '.' . $file_extension;
+                $path = 'imgs/offres/';
+                $file->move($path, $file_name);
+                $validated['photo'] = $path . '/' . $file_name;
+            }
+            $users = user::where('id', $userId)->get();
+            $user = user::find($userId);
+
+            return view('profile.editUser',compact('users','user'));
     }
 
     /**

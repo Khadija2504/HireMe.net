@@ -55,6 +55,14 @@ class AuthenticatedSessionController extends Controller
 
     public function userRegisterCreate(registerUserRequest $request ){
         $validated = $request->validated();
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $file_extension = $file->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'imgs/offres/';
+            $file->move($path, $file_name);
+            $validated['photo'] = $path . '/' . $file_name;
+        }
         $validated['password'] = Hash::make($validated['password']);
         User::create($validated);
         return redirect()->route('login');

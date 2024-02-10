@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CursusEducatifsController;
 use App\Http\Controllers\EntreprisesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,10 @@ Route::prefix('entreprise')->group(function(){
     ->name('company.register');
     Route::post('/register/create',[EntreprisesController::class,'companyRegisterCreate'])
     ->name('company.register.create');
+
+    Route::post('company/profile/update',[EntreprisesController::class,'updateProfile'])
+    ->name('updateProfile');
+
 });
 
 
@@ -64,8 +69,12 @@ Route::prefix('auth')->group(function () {
     Route::post('/register/create',[AuthenticatedSessionController::class,'userRegisterCreate'])
     ->name('user.register.create');
 
-Route::post('/profile/update',[EntreprisesController::class,'updateProfile'])
-->name('updateProfile');
+    Route::get('user/profile/update',[ProfileController::class,'updateProfile'])
+    ->name('updateProfile');
+
+    Route::post('/createCursure',[CursusEducatifsController::class,'createCursure'])
+    ->name('createCursure');
+
     Route::get('/profile', [EntreprisesController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

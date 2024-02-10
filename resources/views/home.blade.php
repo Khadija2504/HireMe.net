@@ -8,6 +8,7 @@
     <main class="container mx-auto px-4 py-8">
         <article class="bg-white shadow-md rounded-lg p-6">
             <h2 class="text-3xl font-bold mb-4">Home page</h2>
+            <li class="mr-6"><a href="{{route('updateProfile')}}">Profile</a></li>
             <a href="{{route('user.logout')}}">logout</a>
             <p class="text-gray-900 mb-6">The Manchester Centre for Plastic Surgery and Burns provides specialist care
                 to the population of Greater Manchester and is the major tertiary referral centre for complex

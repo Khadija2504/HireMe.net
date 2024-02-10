@@ -44,6 +44,7 @@ a {
 }
 
 button {
+	margin-top: 20px;
 	border-radius: 20px;
 	border: 1px solid #3d2bff;
 	background-color: #2b2fff;
@@ -95,7 +96,7 @@ input {
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-	width: 768px;
+	width: 968px;
 	max-width: 100%;
 	min-height: 580px;
 }

@@ -57,7 +57,7 @@ class EntreprisesController extends Controller
     public function companyRegister(){
         return view('auth.register');
     }
-    
+
     public function edit(){
 
         if (Auth::guard('entreprise')->check()) {
@@ -72,14 +72,28 @@ class EntreprisesController extends Controller
             $entreprises = entreprises::find($entreprisesId);
 
             return view('profile.edit',compact('entreprisess','entreprises'));
-    }
+    }    
     public function updateProfile(Request $request){
         dd($request);
     }
-    public function companyRegisterCreate(registerCompanyRequest $request){
-        $validated = $request->validated();
-        $validated['password'] = Hash::make($validated['password']);
-        entreprises::create($validated);
-        return redirect()->route('login');
+
+    public function companyRegisterCreate(registerCompanyRequest $request)
+{
+    $validated = $request->validated();
+
+    if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        $file_extension = $file->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $path = 'imgs/offres/';
+        $file->move($path, $file_name);
+        $validated['photo'] = $path . '/' . $file_name;
     }
+
+    $validated['password'] = Hash::make($validated['password']);
+    entreprises::create($validated);
+    
+    return redirect()->route('login');
+}
+
 }
