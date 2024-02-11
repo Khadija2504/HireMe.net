@@ -24,8 +24,26 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function dashboard(){
-        return view('home');
+    public function dashboard(Request $request){
+        if (Auth::guard('web')->check()) {
+            session(['user_id' => Auth::guard('web')->id()]);
+        }
+            $userId = session('user_id');
+            if(!isset($userId)){
+                
+                return redirect()->route('login_form');
+            }
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $file_extension = $file->getClientOriginalExtension();
+                $file_name = time() . '.' . $file_extension;
+                $path = 'imgs/offres/';
+                $file->move($path, $file_name);
+                $validated['photo'] = $path . '/' . $file_name;
+            }
+            $users = user::where('id', $userId)->get();
+            $user = user::find($userId);
+        return view('home', compact('users','user'));
     }
 
     /**
@@ -59,9 +77,17 @@ class AuthenticatedSessionController extends Controller
             $file = $request->file('photo');
             $file_extension = $file->getClientOriginalExtension();
             $file_name = time() . '.' . $file_extension;
-            $path = 'imgs/offres/';
+            $path = 'imgs/photos/';
             $file->move($path, $file_name);
             $validated['photo'] = $path . '/' . $file_name;
+        }
+        if ($request->hasFile('background')) {
+            $file = $request->file('background');
+            $file_extension = $file->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'imgs/backs/';
+            $file->move($path, $file_name);
+            $validated['background'] = $path . '/' . $file_name;
         }
         $validated['password'] = Hash::make($validated['password']);
         User::create($validated);

@@ -16,16 +16,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('prenom');
             $table->integer('age');
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->string('photo');
+            $table->string('background');
             $table->string('adresse');
+            $table->string('poste_actuel');
             $table->string('contact_information');
             $table->string('about_me');
             $table->string('titre');
-            // $table->foreignId('poste_actuel_id')->constrained('poste_actuel');
             $table->string('password');
             $table->string('industrie');
             $table->timestamps();

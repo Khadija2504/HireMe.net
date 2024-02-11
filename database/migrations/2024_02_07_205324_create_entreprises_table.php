@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('entreprises', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('email');
+            $table->string('email')->unique;
             $table->string('photo');
+            $table->string('background');
             $table->string('adresse');
             $table->string('role')->default('company');
             $table->string('slogan');

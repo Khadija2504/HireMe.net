@@ -24,7 +24,7 @@ class EducationRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom_cursus_educatifs' => 'required' ,
+            'nom_cursus_educatifs' => 'required|max:255' ,
         ];
     }
 }

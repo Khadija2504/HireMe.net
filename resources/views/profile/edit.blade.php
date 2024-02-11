@@ -20,7 +20,6 @@
                                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 text-black">First Name</label>
                                 <input type="text" name="Nom" id="" value="{{$entreprises->nom}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500" placeholder="service title" required="">
                             </div>
-hop
                             <div class="col-span-2">
                                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 text-black">Last Name</label>
                                 <input type="text" name="Prenom" id="" value="{{$entreprises->prenom}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500" placeholder="service title" required="">

@@ -1,10 +1,5 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
+@extends('layouts.master')
+@section('main')
     <main class="container mx-auto px-4 py-8">
         <article class="bg-white shadow-md rounded-lg p-6">
             <h2 class="text-3xl font-bold mb-4">Home page</h2>
@@ -66,4 +61,4 @@
         </section>
     </main>
 
-</x-app-layout>
+@endsection

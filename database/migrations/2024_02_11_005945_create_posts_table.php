@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('poste_actuels', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_OffreDemploi')->constrained('offre_demplois');
-            $table->string('poste_actuel_message');
-            $table->timestamp('created_at')->nullable();
+            $table->foreignId('users_id')->constrained('users');
+            $table->string('post');
+            $table->foreignId('id_offre_demplois')->constrained('offre_demplois');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('poste_actuels');
+        Schema::dropIfExists('posts');
     }
 };

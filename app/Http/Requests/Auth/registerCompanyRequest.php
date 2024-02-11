@@ -31,6 +31,7 @@ class registerCompanyRequest extends FormRequest
             'slogan' => 'required|max:255',
             'industrie' => 'required|max:255',
             'photo' => '',
+            'background' => '',
             'password' => 'required|string|min:4',
         ];
     }

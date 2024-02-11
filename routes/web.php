@@ -45,7 +45,7 @@ Route::prefix('entreprise')->group(function(){
 });
 
 
-/* ------ company's route end -------*/
+/* ------ company's routes end -------*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -70,7 +70,9 @@ Route::prefix('auth')->group(function () {
     ->name('user.register.create');
 
     Route::get('user/profile/update',[ProfileController::class,'updateProfile'])
-    ->name('updateProfile');
+    ->name('updateProfileUser');
+    Route::put('user/profile/updateUser',[ProfileController::class,'updateProfileUser'])
+    ->name('updateProfile.User');
 
     Route::post('/createCursure',[CursusEducatifsController::class,'createCursure'])
     ->name('createCursure');

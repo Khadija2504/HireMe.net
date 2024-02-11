@@ -29,6 +29,8 @@ class User extends Authenticatable
         'industrie',
         'about_me',
         'photo',
+        'background',
+        'poste_actuel',
         'email',
         'password',
     ];

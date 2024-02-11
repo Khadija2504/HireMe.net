@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\poste_actuel;
+use App\Models\post;
 use Illuminate\Http\Request;
 
-class PosteActuelController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class PosteActuelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\poste_actuel  $poste_actuel
+     * @param  \App\Models\post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(poste_actuel $poste_actuel)
+    public function show(post $post)
     {
         //
     }
@@ -52,10 +52,10 @@ class PosteActuelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\poste_actuel  $poste_actuel
+     * @param  \App\Models\post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(poste_actuel $poste_actuel)
+    public function edit(post $post)
     {
         //
     }
@@ -64,10 +64,10 @@ class PosteActuelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\poste_actuel  $poste_actuel
+     * @param  \App\Models\post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, poste_actuel $poste_actuel)
+    public function update(Request $request, post $post)
     {
         //
     }
@@ -75,10 +75,10 @@ class PosteActuelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\poste_actuel  $poste_actuel
+     * @param  \App\Models\post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(poste_actuel $poste_actuel)
+    public function destroy(post $post)
     {
         //
     }

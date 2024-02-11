@@ -19,13 +19,52 @@ class EntreprisesController extends Controller
     public function index(){
         return view('auth.login');
     }
-    public function dashboard(){
-        return view('dashboard');
+    public function dashboard(Request $request){
+        dd($request);
+        if (Auth::guard('web')->check()) {
+            session(['user_id' => Auth::guard('web')->id()]);
+        }
+            $userId = session('user_id');
+            if(!isset($userId)){
+                return redirect()->route('login_form');
+            }
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $file_extension = $file->getClientOriginalExtension();
+                $file_name = time() . '.' . $file_extension;
+                $path = 'imgs/offres/';
+                $file->move($path, $file_name);
+                $validated['photo'] = $path . '/' . $file_name;
+            }
+            $users = user::where('id', $userId)->get();
+            dd($users);
+            $user = user::find($userId);
+        return view('dashboard', compact('users','user'));
     }
 
-    public function home(){
-        return view('home');
+    public function home(Request $request){
+        if (Auth::guard('web')->check()) {
+            session(['user_id' => Auth::guard('web')->id()]);
+        }
+            $userId = session('user_id');
+            if(!isset($userId)){
+                
+                return redirect()->route('login_form');
+            }
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $file_extension = $file->getClientOriginalExtension();
+                $file_name = time() . '.' . $file_extension;
+                $path = 'imgs/offres/';
+                $file->move($path, $file_name);
+                $validated['photo'] = $path . '/' . $file_name;
+            }
+            $users = user::where('id', $userId)->get();
+            dd($users);
+            $user = user::find($userId);
+        return view('home', compact('users','user'));
     }
+
     public function login(EntrepriseRequest $request)
 {
     // $loginUserRequest = $loginRequest->only('email', 'password');
@@ -85,9 +124,17 @@ class EntreprisesController extends Controller
         $file = $request->file('photo');
         $file_extension = $file->getClientOriginalExtension();
         $file_name = time() . '.' . $file_extension;
-        $path = 'imgs/offres/';
+        $path = 'imgs/photos/';
         $file->move($path, $file_name);
         $validated['photo'] = $path . '/' . $file_name;
+    }
+    if ($request->hasFile('background')) {
+        $file = $request->file('background');
+        $file_extension = $file->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $path = 'imgs/backs/';
+        $file->move($path, $file_name);
+        $validated['background'] = $path . '/' . $file_name;
     }
 
     $validated['password'] = Hash::make($validated['password']);

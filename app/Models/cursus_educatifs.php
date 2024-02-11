@@ -11,7 +11,7 @@ class cursus_educatifs extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $fillable = [
-        'nom_cursor_educatifs',
+        'nom_cursus_educatifs',
     ];
 
         /**

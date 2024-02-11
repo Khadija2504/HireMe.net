@@ -33,7 +33,9 @@ class registerUserRequest extends FormRequest
             'about_me' => 'required|max:255',
             'titre' => 'required|max:255',
             'industrie' => 'required|max:255',
+            'poste_actuel' => 'required|max:55',
             'photo' => '',
+            'background' => '',
             'password' => 'required|string|min:4',
         ];
     }

@@ -34,10 +34,16 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="flex_div">
                 <input type="text" name="contact_information" placeholder="contact informations" required>
                 @error('contact_information')
                     <p class="error">{{ $message }}</p>
                 @enderror
+                <input type="text" name="poste_actuel" placeholder="poste_actuel" required>
+                @error('poste_actuel')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+            </div>
                 <input type="text" name="about_me" placeholder="give us an idea about you" required>
                 @error('about_me')
                     <p class="error">{{ $message }}</p>
@@ -53,8 +59,8 @@
                 @enderror
             </div>
             <div class="flex_div">
-                <input type="text" name="adresse" placeholder="Adresse" required>
-                @error('adresse')
+                <input type="file" name="background" placeholder="background" required>
+                @error('background')
                     <p class="error">{{ $message }}</p>
                 @enderror
                 <input type="file" name="photo" placeholder="Chose your photo profile" required>
@@ -62,10 +68,16 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="flex_div">
+                <input type="text" name="adresse" placeholder="Adresse" required>
+                @error('adresse')
+                    <p class="error">{{ $message }}</p>
+                @enderror
                 <input type="password" name="password" placeholder="Mot de passe" required>
                 @error('password')
                     <p class="error">{{ $message }}</p>
                 @enderror
+            </div>
                 <button type="submit" style="margin-top: 0" name="register">S'inscrire</button>
         <div style="margin-top: 20px">Already have an account? <a href="{{ route('login') }}">Log in</a></div>
         </form>
@@ -102,10 +114,16 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="flex_div">
+                <input type="file" name="background" placeholder="background" required>
+                @error('background')
+                    <p class="error">{{ $message }}</p>
+                @enderror
                 <input type="file" name="photo" placeholder="Chose your photo profile" required>
                 @error('photo')
                     <p class="error">{{ $message }}</p>
                 @enderror
+            </div>
                 <input type="password" name="password" placeholder="Mot de passe" required>
                 @error('password')
                     <p class="error">{{ $message }}</p>
