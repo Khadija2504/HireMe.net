@@ -23,14 +23,15 @@
                 <ul class="flex justify-center text-white">
                     <li class="mr-6"><a href="/home">Home</a></li>
                     <li class="mr-6"><a href="/news">News</a></li>
-                    <li class="mr-6"><a href="/services">Our services</a></li>
+                    <li class="mr-6"><a href="{{route('displayOffreDemplois')}}">All jobs</a></li>
                     <li class="mr-6"><a href="/locations">Our locations</a></li>
                     <li class="mr-6"><a href="/team">Our team</a></li>
-                    <div x-data="{ open: false }">
-                    <li class="mr-6"><a href="#" @click="open = true" class=""> Ajouter service</a></li>
-                    </div>
+                    <li class="mr-6"><a href="{{route('offreDemplois')}}"> ajouter offre d'emploi</a></li>
                     <li class="mr-6"><a href="/myService">votre services</a></li> {{-- as ->popup --}}
-                    <li class="mr-6"><a href="{{route('profile.edit')}}">Profile</a></li>
+                    <div x-data="{ open: false }">
+                        <li class="mr-6"><a href="#" @click="open = true" class="">Profile</a></li>
+                        @include('components.profile')
+                    </div>
                     <li class="mr-6"><a href="{{route('company.logout')}}">Logout</a></li>
                 </ul>
             </div>
@@ -46,8 +47,8 @@
                     <li class="md-2"><a href="/team">Our team</a></li>
                     <li><a href="/contact">Contact us</a></li>
                     <div x-data="{ open: false }">
-                    <li class="md-2"><a href="#" @click="open = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded>Ajouter service"></a></li>
-                    @yield('popup')
+                        <li class="mr-6"><a href="#" @click="open = true" class="">Profile</a></li>
+                        @include('components.profile')
                     </div>
                     <li class="md-2"><a href="">votre services</a></li> {{-- as ->popup --}}
                     <li class="md-2"><a href="/profile">Profile</a></li>
@@ -89,10 +90,10 @@
                     <li class="md-2"><a href="/locations">Our locations</a></li>
                     <li class="md-2"><a href="/team">Our team</a></li>
                     <li><a href="/contact">Contact us</a></li>
-                    <div x-data="{ open: false }">
-                    <li class="md-2"><a href="#" @click="open = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded>Ajouter service"></a></li>
-                    @yield('popup')
-                    </div>
+                        <div x-data="{ open: false }">
+                            <li class="mr-6"><a href="#" @click="open = true" class="">Profile</a></li>
+                            @include('components.profile')
+                        </div>
                     <li class="md-2"><a href="">votre services</a></li> {{-- as ->popup --}}
                     <li class="md-2"><a href="/profile">Profile</a></li>
                 </ul>
@@ -114,7 +115,10 @@
                     <li class="mr-6"><a href="#" @click="open = true" class=""> Ajouter service</a></li>
                     </div>
                     <li class="mr-6"><a href="/myService">votre services</a></li> {{-- as ->popup --}}
-                    <li class="mr-6"><a href="{{route('profile.edit')}}">Profile</a></li>
+                    <div x-data="{ open: false }">
+                        <li class="mr-6"><a href="#" @click="open = true" class="">Profile</a></li>
+                        @include('components.profile')
+                    </div>
                     <li class="mr-6"><a href="{{route('company.logout')}}">Logout</a></li>
                 </ul>
             </div>
@@ -130,8 +134,8 @@
                     <li class="md-2"><a href="/team">Our team</a></li>
                     <li><a href="/contact">Contact us</a></li>
                     <div x-data="{ open: false }">
-                    <li class="md-2"><a href="#" @click="open = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded>Ajouter service"></a></li>
-                    @yield('popup')
+                        <li class="mr-6"><a href="#" @click="open = true" class="">Profile</a></li>
+                        @include('components.profile')
                     </div>
                     <li class="md-2"><a href="">votre services</a></li> {{-- as ->popup --}}
                     <li class="md-2"><a href="/profile">Profile</a></li>

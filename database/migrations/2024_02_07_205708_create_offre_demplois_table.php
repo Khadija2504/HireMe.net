@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->foreignId('competences_requises_id')->constrained('competences');
             $table->enum('type',['a_distanc','hybride','a_temps_plein)']);
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
     }
 

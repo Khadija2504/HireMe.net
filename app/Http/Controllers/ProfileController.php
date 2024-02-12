@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\registerUserRequest;
+use App\Http\Requests\ProfileUpCompanyRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\competences;
+use App\Models\entreprises;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,18 +30,6 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
 
     public function updateProfile(Request $request){
         if (Auth::guard('web')->check()) {
@@ -67,12 +58,13 @@ class ProfileController extends Controller
             }
             $users = user::where('id', $userId)->get();
             $user = user::find($userId);
+            $competences = competences::all();
             // dd($user);
-            return view('profile.editUser',compact('users','user'));
+            return view('profile.editUser',compact('users','user','competences'));
     }
-    public function updateProfileUser(registerUserRequest $request){
+    public function up(ProfileUpdateRequest $request){
         $validated = $request->validated();
-        dd($validated);
+        // dd($request);
         $userId = session('user_id');
         $user = User::find($userId);
 
@@ -94,10 +86,40 @@ class ProfileController extends Controller
         }
 
         $validated['password'] = Hash::make($validated['password']);
-        // $userData = User::updated($validated);
         $userData = $user->Update($validated);
 
-        dd($userData);
+        // dd($userData);
+
+        return redirect()->back();
+    }
+
+    public function upCompany(ProfileUpCompanyRequest $request){
+        $validated = $request->validated();
+        // dd($request);
+        $entrepriseId = session('entreprise_id');
+        $entreprise = entreprises::find($entrepriseId);
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $file_extension = $file->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'imgs/photos/';
+            $file->move($path, $file_name);
+            $validated['photo'] = $path . '/' . $file_name;
+        }
+        if ($request->hasFile('background')) {
+            $file = $request->file('background');
+            $file_extension = $file->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'imgs/backs/';
+            $file->move($path, $file_name);
+            $validated['background'] = $path . '/' . $file_name;
+        }
+
+        $validated['password'] = Hash::make($validated['password']);
+        $entrepriseData = $entreprise->Update($validated);
+
+        // dd($entrepriseData);
 
         return redirect()->back();
     }

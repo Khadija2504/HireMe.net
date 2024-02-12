@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\EntrepriseRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\registerCompanyRequest;
+use App\Http\Requests\OffreDemploisRequest;
+use App\Models\competences;
 use App\Models\entreprises;
+use App\Models\OffreDemplois;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -20,49 +23,17 @@ class EntreprisesController extends Controller
         return view('auth.login');
     }
     public function dashboard(Request $request){
-        dd($request);
-        if (Auth::guard('web')->check()) {
-            session(['user_id' => Auth::guard('web')->id()]);
+        
+        if (Auth::guard('entreprise')->check()) {
+            session(['entreprise_id' => Auth::guard('entreprise')->id()]);
         }
-            $userId = session('user_id');
-            if(!isset($userId)){
+            $entrepriseId = session('entreprise_id');
+            if(!isset($entrepriseId)){
                 return redirect()->route('login_form');
             }
-            if ($request->hasFile('photo')) {
-                $file = $request->file('photo');
-                $file_extension = $file->getClientOriginalExtension();
-                $file_name = time() . '.' . $file_extension;
-                $path = 'imgs/offres/';
-                $file->move($path, $file_name);
-                $validated['photo'] = $path . '/' . $file_name;
-            }
-            $users = user::where('id', $userId)->get();
-            dd($users);
-            $user = user::find($userId);
-        return view('dashboard', compact('users','user'));
-    }
-
-    public function home(Request $request){
-        if (Auth::guard('web')->check()) {
-            session(['user_id' => Auth::guard('web')->id()]);
-        }
-            $userId = session('user_id');
-            if(!isset($userId)){
-                
-                return redirect()->route('login_form');
-            }
-            if ($request->hasFile('photo')) {
-                $file = $request->file('photo');
-                $file_extension = $file->getClientOriginalExtension();
-                $file_name = time() . '.' . $file_extension;
-                $path = 'imgs/offres/';
-                $file->move($path, $file_name);
-                $validated['photo'] = $path . '/' . $file_name;
-            }
-            $users = user::where('id', $userId)->get();
-            dd($users);
-            $user = user::find($userId);
-        return view('home', compact('users','user'));
+            $entreprises = entreprises::where('id', $entrepriseId)->get();
+            $entreprise = entreprises::find($entrepriseId);
+        return view('dashboard', compact('entreprises','entreprise'));
     }
 
     public function login(EntrepriseRequest $request)
@@ -84,20 +55,12 @@ class EntreprisesController extends Controller
         Auth::guard('entreprise')->logout();
         return redirect()->route('login_form');
     }
-    // public function store(LoginRequest $request): RedirectResponse
-    // {
-    //     $request->authenticate();
-
-    //     $request->session()->regenerate();
-
-    //     return redirect()->intended(RouteServiceProvider::HOME);
-    // }
 
     public function companyRegister(){
         return view('auth.register');
     }
 
-    public function edit(){
+    public function updateProfileCompany(){
 
         if (Auth::guard('entreprise')->check()) {
             session(['company_id' => Auth::guard('entreprise')->id()]);
@@ -107,13 +70,11 @@ class EntreprisesController extends Controller
                 
                 return redirect()->route('login_form');
             }
-            $entreprisess = entreprises::where('id', $entreprisesId)->get();
-            $entreprises = entreprises::find($entreprisesId);
+            $entreprises = entreprises::where('id', $entreprisesId)->get();
+            $entreprise = entreprises::find($entreprisesId);
+            $competences = competences::all();
 
-            return view('profile.edit',compact('entreprisess','entreprises'));
-    }    
-    public function updateProfile(Request $request){
-        dd($request);
+            return view('profile.edit',compact('entreprise','entreprises','competences'));
     }
 
     public function companyRegisterCreate(registerCompanyRequest $request)

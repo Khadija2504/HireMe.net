@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CursusEducatifsController;
 use App\Http\Controllers\EntreprisesController;
+use App\Http\Controllers\OffreDemploisController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,8 +40,20 @@ Route::prefix('entreprise')->group(function(){
     Route::post('/register/create',[EntreprisesController::class,'companyRegisterCreate'])
     ->name('company.register.create');
 
-    Route::post('company/profile/update',[EntreprisesController::class,'updateProfile'])
-    ->name('updateProfile');
+    Route::get('company/profile/update',[EntreprisesController::class,'updateProfileCompany'])
+    ->name('updateProfileCompany');
+
+    Route::get('company/offer',[OffreDemploisController::class,'offreDemplois'])
+    ->name('offreDemplois');
+
+    Route::post('company/offer/create',[OffreDemploisController::class,'addOffer'])
+    ->name('addOffer');
+
+    Route::get('company/offer/display',[OffreDemploisController::class,'displayOffreDemplois'])
+    ->name('displayOffreDemplois');
+
+    Route::put('company/profile/up',[ProfileController::class,'upCompany'])
+    ->name('upCompany');
 
 });
 
@@ -71,9 +84,10 @@ Route::prefix('auth')->group(function () {
 
     Route::get('user/profile/update',[ProfileController::class,'updateProfile'])
     ->name('updateProfileUser');
-    Route::put('user/profile/updateUser',[ProfileController::class,'updateProfileUser'])
-    ->name('updateProfile.User');
 
+    Route::put('user/profile/up',[ProfileController::class,'up'])
+    ->name('up');
+    
     Route::post('/createCursure',[CursusEducatifsController::class,'createCursure'])
     ->name('createCursure');
 
