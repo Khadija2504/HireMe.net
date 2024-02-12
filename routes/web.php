@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CompetencesController;
 use App\Http\Controllers\CursusEducatifsController;
 use App\Http\Controllers\EntreprisesController;
 use App\Http\Controllers\OffreDemploisController;
@@ -73,7 +74,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/login/store',[AuthenticatedSessionController::class,'store'])
     ->name('loginUser');
 
-    Route::get('/user/dashboard',[AuthenticatedSessionController::class,'dashboard'])
+    Route::get('/user/dashboard',[AuthenticatedSessionController::class,'dashboardUser'])
     ->name('user.dashboard')->middleware('auth');
 
     Route::get('/logout',[AuthenticatedSessionController::class,'userLogout'])
@@ -90,6 +91,9 @@ Route::prefix('auth')->group(function () {
     
     Route::post('/createCursure',[CursusEducatifsController::class,'createCursure'])
     ->name('createCursure');
+
+    Route::post('/user/competences/create',[CompetencesController::class,'competencesCreate'])
+    ->name('competencesCreate');
 
     Route::get('/profile', [EntreprisesController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

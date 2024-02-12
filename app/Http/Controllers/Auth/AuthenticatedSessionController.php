@@ -24,7 +24,7 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function dashboard(Request $request){
+    public function dashboardUser(Request $request){
         if (Auth::guard('web')->check()) {
             session(['user_id' => Auth::guard('web')->id()]);
         }

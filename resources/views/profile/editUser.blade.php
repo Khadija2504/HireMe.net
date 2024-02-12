@@ -5,12 +5,15 @@
             <div class="form-container sign-up-container">
                 <h2 class="text-xl font-bold mb-4"> Control your informations profile </h2>
                 
-                <form class="p-4 md:p-5" action="{{ route('up')}}" method="post">
+                <form class="p-4 md:p-5" action="{{ route('competencesCreate')}}" method="post">
                         @csrf
-                        @method('PUT')
                     <div class="grid gap-4 mb-4 grid-cols-2">
 
-                        <select name="competences_requises_id[]"  multiple id="">les competences requises
+                        <input type="hidden" name="users_id" value="{{$userId}}" required>
+                        <input type="hidden" name="type_user" value="user" required>
+                        <input type="hidden" name="entreprise_id" value="{{$userId}}" required>
+
+                        <select name="competences_id[]"  multiple id="" required>les competences requises
                             <option selected disabled="">Select competences</option>
                             @foreach ($competences as $competence)
                                 <option value="{{ $competence->id }}">{{ $competence->nom_competence }}</option>
@@ -18,7 +21,7 @@
                         </select>
 
                     </div>
-                    <button type="submit" name="store" class="inline-flex items-center focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-6 bg-blue-500 hover:bg-blue-200 focus:ring-gray-800">
+                    <button type="submit" name="competencesCreate" class="inline-flex items-center focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-6 bg-blue-500 hover:bg-blue-200 focus:ring-gray-800">
                         ajouter votre competences
                     </button>
                 </form>

@@ -60,11 +60,10 @@ class ProfileController extends Controller
             $user = user::find($userId);
             $competences = competences::all();
             // dd($user);
-            return view('profile.editUser',compact('users','user','competences'));
+            return view('profile.editUser',compact('users','user','competences', 'userId'));
     }
     public function up(ProfileUpdateRequest $request){
         $validated = $request->validated();
-        // dd($request);
         $userId = session('user_id');
         $user = User::find($userId);
 
