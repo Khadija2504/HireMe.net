@@ -99,7 +99,7 @@ class EntreprisesController extends Controller
     }
 
     $validated['password'] = Hash::make($validated['password']);
-    entreprises::create($validated);
+    entreprises::create($validated);                                                   
     
     return redirect()->route('login');
 }

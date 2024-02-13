@@ -46,8 +46,9 @@ class OffreDemploisController extends Controller
             $entreprises = entreprises::where('id', $entreprisesId)->get();
             $entreprise = entreprises::find($entreprisesId);
             $offreDemplois = OffreDemplois::all();
+            $offre = OffreDemplois::with('competences');
 
-            return view("offres_d'emploi.dispalyOffres",compact('entreprise','entreprises', 'offreDemplois'));
+            return view("offres_d'emploi.dispalyOffres",compact('entreprise','entreprises', 'offreDemplois', 'offre'));
     }
     public function deleteOffer(OffreDemplois $offreDemplois){
         $offreDemplois->delete();

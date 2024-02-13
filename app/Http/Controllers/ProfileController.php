@@ -7,6 +7,8 @@ use App\Http\Requests\ProfileUpCompanyRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\competences;
 use App\Models\entreprises;
+use App\Models\experiences_proves;
+use App\Models\langues_maitrisees;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -59,8 +61,10 @@ class ProfileController extends Controller
             $users = user::where('id', $userId)->get();
             $user = user::find($userId);
             $competences = competences::all();
-            // dd($user);
-            return view('profile.editUser',compact('users','user','competences', 'userId'));
+            $langues_maitrisees = langues_maitrisees::all();
+            $experiences = experiences_proves::find($userId);
+            // dd($experiences->nom_competence_prof);
+            return view('profile.editUser',compact('users','user','competences', 'userId', 'langues_maitrisees', 'experiences'));
     }
     public function up(ProfileUpdateRequest $request){
         $validated = $request->validated();
@@ -122,7 +126,7 @@ class ProfileController extends Controller
 
         return redirect()->back();
     }
-
+ 
     /**
      * Delete the user's account.
      */

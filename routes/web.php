@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CompetencesController;
 use App\Http\Controllers\CursusEducatifsController;
 use App\Http\Controllers\EntreprisesController;
+use App\Http\Controllers\ExperiencesProvesController;
+use App\Http\Controllers\LanguesMaitriseesController;
 use App\Http\Controllers\OffreDemploisController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -30,9 +32,6 @@ Route::prefix('entreprise')->group(function(){
     Route::get('/dashboard',[EntreprisesController::class,'dashboard'])
     ->name('company.dashboard')->middleware('entreprise');
 
-    Route::get('/home',[EntreprisesController::class,'home'])
-    ->name('user.dashboard')->middleware('auth');
-
     Route::get('/logout',[EntreprisesController::class,'companyLogout'])
     ->name('company.logout')->middleware('entreprise');
 
@@ -41,33 +40,25 @@ Route::prefix('entreprise')->group(function(){
     Route::post('/register/create',[EntreprisesController::class,'companyRegisterCreate'])
     ->name('company.register.create');
 
-    Route::get('company/profile/update',[EntreprisesController::class,'updateProfileCompany'])
+    Route::get('/company/profile/update',[EntreprisesController::class,'updateProfileCompany'])
     ->name('updateProfileCompany');
 
-    Route::get('company/offer',[OffreDemploisController::class,'offreDemplois'])
+    Route::get('/company/offer',[OffreDemploisController::class,'offreDemplois'])
     ->name('offreDemplois');
 
-    Route::post('company/offer/create',[OffreDemploisController::class,'addOffer'])
+    Route::post('/company/offer/create',[OffreDemploisController::class,'addOffer'])
     ->name('addOffer');
 
-    Route::get('company/offer/display',[OffreDemploisController::class,'displayOffreDemplois'])
+    Route::get('/company/offer/display',[OffreDemploisController::class,'displayOffreDemplois'])
     ->name('displayOffreDemplois');
 
-    Route::put('company/profile/up',[ProfileController::class,'upCompany'])
+    Route::put('/company/profile/up',[ProfileController::class,'upCompany'])
     ->name('upCompany');
 
 });
 
 
 /* ------ company's routes end -------*/
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-Route::get('/dashboard', function () {
-    return view('home');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::prefix('auth')->group(function () {
 
@@ -83,10 +74,10 @@ Route::prefix('auth')->group(function () {
     Route::post('/register/create',[AuthenticatedSessionController::class,'userRegisterCreate'])
     ->name('user.register.create');
 
-    Route::get('user/profile/update',[ProfileController::class,'updateProfile'])
+    Route::get('/user/profile/update',[ProfileController::class,'updateProfile'])
     ->name('updateProfileUser');
 
-    Route::put('user/profile/up',[ProfileController::class,'up'])
+    Route::put('/user/profile/up',[ProfileController::class,'up'])
     ->name('up');
     
     Route::post('/createCursure',[CursusEducatifsController::class,'createCursure'])
@@ -95,9 +86,12 @@ Route::prefix('auth')->group(function () {
     Route::post('/user/competences/create',[CompetencesController::class,'competencesCreate'])
     ->name('competencesCreate');
 
-    Route::get('/profile', [EntreprisesController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/user/langues/add',[LanguesMaitriseesController::class,'languesMaitriseesCreate'])
+    ->name('languesMaitriseesCreate');
+
+    Route::post('/user/experiences/create',[ExperiencesProvesController::class,'experienceProf'])
+    ->name('experienceProf');
+
 });
 
 require __DIR__.'/auth.php';

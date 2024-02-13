@@ -78,7 +78,7 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
-                <button type="submit" style="margin-top: 0" name="register">S'inscrire</button>
+                <button type="submit" style="margin-top: 0" name="registerUser">S'inscrire</button>
         <div style="margin-top: 20px">Already have an account? <a href="{{ route('login') }}">Log in</a></div>
         </form>
     </div>
@@ -128,7 +128,7 @@
                 @error('password')
                     <p class="error">{{ $message }}</p>
                 @enderror
-                <button type="submit" style="margin-top: 0" name="register">S'inscrire</button>
+                <button type="submit" style="margin-top: 0" name="registerCompany">S'inscrire</button>
             <div style="margin-top: 20px">Already have an account? <a href="{{ route('login') }}">Log in</a></div>
 
         </form>

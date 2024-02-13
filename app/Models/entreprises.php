@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as AuthenticatableUser;
@@ -49,4 +50,9 @@ class entreprises extends AuthenticatableUser
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function offersEntreprise(): HasMany
+    {
+        return $this->hasMany(OffreDemplois::class);
+    }
 }

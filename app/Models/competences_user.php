@@ -12,21 +12,11 @@ class competences_user extends Model
         'users_id',
         'type_user',
         'competences_id',
-        'entreprise_id',
     ];
 
-    public function entreprise()
+    public function offresDemploi()
     {
-        return $this->belongsTo(entreprises::class, 'entreprise_id');
+        return $this->belongsToMany(OffreDemplois::class, 'offre_demploi_competences', 'competences_id', 'offre_demploi_id');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function competence()
-    {
-        return $this->belongsTo(competences::class, 'competence_id');
-    }
 }

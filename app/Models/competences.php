@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class competences extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nom_competence',                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    ];
+    public function offresDemploi()
+    {
+        return $this->belongsToMany(OffreDemplois::class, 'offre_demploi_competences', 'competences_id', 'offre_demploi_id');
+    }
 }

@@ -16,4 +16,9 @@ class OffreDemplois extends Model
         'competences_requises_id',
         'type',
     ];
+
+    public function competences()
+    {
+        return $this->belongsToMany(competences::class, 'offre_demploi_competences', 'offre_demploi_id', 'competences_id');
+    }
 }

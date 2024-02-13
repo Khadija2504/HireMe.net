@@ -10,6 +10,9 @@
             <li class="bg-gray-100 text-blue-900 rounded-lg p-6 shadow-md">
                 <h3 class="text-xl font-bold mb-4">{{$offreDemploi->titre}}</h3>
                 <p class="text-gray-700 mb-4">{{$offreDemploi->description}} <br>
+                    @foreach ($offre->competences as $competence)
+                    competences:  {{$competence->nom_competence}} <br>
+                    @endforeach
                     Create at : {{$offreDemploi->created_at}} <br>
                     Updated at : {{$offreDemploi->updated_at}} <br>
                 </p>
