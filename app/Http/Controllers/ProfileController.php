@@ -39,38 +39,19 @@ class ProfileController extends Controller
         }
             $userId = session('user_id');
             if(!isset($userId)){
-                
                 return redirect()->route('login_form');
-            }
-            if ($request->hasFile('photo')) {
-                $file = $request->file('photo');
-                $file_extension = $file->getClientOriginalExtension();
-                $file_name = time() . '.' . $file_extension;
-                $path = 'imgs/photos/';
-                $file->move($path, $file_name);
-                $validated['photo'] = $path . '/' . $file_name;
-            }
-            if ($request->hasFile('background')) {
-                $file = $request->file('background');
-                $file_extension = $file->getClientOriginalExtension();
-                $file_name = time() . '.' . $file_extension;
-                $path = 'imgs/backs/';
-                $file->move($path, $file_name);
-                $validated['background'] = $path . '/' . $file_name;
             }
             $users = user::where('id', $userId)->get();
             $user = user::find($userId);
             $competences = competences::all();
             $langues_maitrisees = langues_maitrisees::all();
-            $experiences = experiences_proves::find($userId);
-            // dd($experiences->nom_competence_prof);
+            $experiences = experiences_proves::where('user_id', $userId)->orderBy('date', 'desc')->get();
             return view('profile.editUser',compact('users','user','competences', 'userId', 'langues_maitrisees', 'experiences'));
     }
     public function up(ProfileUpdateRequest $request){
         $validated = $request->validated();
         $userId = session('user_id');
         $user = User::find($userId);
-
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $file_extension = $file->getClientOriginalExtension();
@@ -90,9 +71,6 @@ class ProfileController extends Controller
 
         $validated['password'] = Hash::make($validated['password']);
         $userData = $user->Update($validated);
-
-        // dd($userData);
-
         return redirect()->back();
     }
 

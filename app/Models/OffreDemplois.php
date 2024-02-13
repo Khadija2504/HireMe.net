@@ -13,12 +13,14 @@ class OffreDemplois extends Model
         'id_entreprise',
         'titre',
         'description',
-        'competences_requises_id',
         'type',
     ];
 
     public function competences()
     {
-        return $this->belongsToMany(competences::class, 'offre_demploi_competences', 'offre_demploi_id', 'competences_id');
+        return $this->belongsToMany(competences::class, 'competences_id');
+    }
+    public function entreprises(){
+        return $this->belongsTo(entreprises::class, 'id_entreprise');
     }
 }

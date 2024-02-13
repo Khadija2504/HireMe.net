@@ -73,8 +73,9 @@ class EntreprisesController extends Controller
             $entreprises = entreprises::where('id', $entreprisesId)->get();
             $entreprise = entreprises::find($entreprisesId);
             $competences = competences::all();
+            $offreDemplois = OffreDemplois::find($entreprisesId)->orderBy('updated_at', 'desc')->get();
 
-            return view('profile.edit',compact('entreprise','entreprises','competences'));
+            return view('profile.edit',compact('entreprise','entreprises','competences', 'offreDemplois'));
     }
 
     public function companyRegisterCreate(registerCompanyRequest $request)

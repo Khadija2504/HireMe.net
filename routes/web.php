@@ -5,8 +5,10 @@ use App\Http\Controllers\CompetencesController;
 use App\Http\Controllers\CursusEducatifsController;
 use App\Http\Controllers\EntreprisesController;
 use App\Http\Controllers\ExperiencesProvesController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LanguesMaitriseesController;
 use App\Http\Controllers\OffreDemploisController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +90,18 @@ Route::prefix('auth')->group(function () {
 
     Route::post('/user/langues/add',[LanguesMaitriseesController::class,'languesMaitriseesCreate'])
     ->name('languesMaitriseesCreate');
+
+    Route::get('/invoice', [InvoiceController::class, 'generate'])
+    ->name('invoice.generate');
+
+    Route::get('/user/postForm{id}',[PostController::class, 'postForm'])
+    ->name('postForm');
+
+    Route::post('/user/post', [PostController::class,'post'])
+    ->name('post');
+
+    Route::get('/user/dispalyPosts{id}',[PostController::class, 'dispaly'])
+    ->name('dispalyPosts');
 
     Route::post('/user/experiences/create',[ExperiencesProvesController::class,'experienceProf'])
     ->name('experienceProf');

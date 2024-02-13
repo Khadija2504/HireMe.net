@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('id_entreprise')->constrained('entreprises');
             $table->string('titre');
             $table->string('description');
-            $table->foreignId('competences_requises_id')->constrained('competences');
             $table->enum('type',['a_distanc','hybride','a_temps_plein)']);
             $table->timestamps();
         });

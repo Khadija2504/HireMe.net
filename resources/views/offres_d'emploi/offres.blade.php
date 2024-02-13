@@ -8,7 +8,10 @@
                             @csrf
                         <div class="grid gap-4 mb-4 grid-cols-2">
 
-                            <input type="hidden" name="id_entreprise" value="{{$entreprisesId}}">
+                            <input type="hidden" name="entreprise_id" value="{{$entreprisesId}}" required>
+                            <input type="hidden" name="type_user" value="user" required>
+                            <input type="hidden" name="users_id" value="" required>
+                            <input type="hidden" name="id_entreprise" value="{{$entreprisesId}}" required>
 
                             <div class="col-span-2">
                                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 text-black">titre</label>
@@ -22,7 +25,7 @@
 
                             <div class="col-span-2">
                                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 text-black">les competences requises</label>
-                                <select name="competences_requises_id"  id="">les competences requises
+                                <select name="competences_id" multiple  id="">les competences requises
                                     <option selected disabled="">Select competences</option>
                                     @foreach ($competences as $competence)
                                         <option value="{{ $competence->id }}">{{ $competence->nom_competence }}</option>

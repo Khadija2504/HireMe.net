@@ -1,13 +1,12 @@
 @extends('layouts.master')
 @section('main')
     <div class="flex flex-row xs:flex-wrap ">
-        <div class="flex items-enter justify-start min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" style="width: 50%; margin: 5%;">
+        <div class="flex items-enter justify-start min-h-screen pt-4 px-4 pb-20 sm:block sm:p-0" style="width: 50%; margin: 5%;">
             <div class="form-container sign-up-container">
                 <h2 class="text-xl font-bold mb-4"> Ajouter votre competences </h2>
                 
                 <form class="p-4 md:p-5" action="{{ route('competencesCreate')}}" method="post">
                         @csrf
-
                         <input type="hidden" name="users_id" value="{{$userId}}" required>
                         <input type="hidden" name="type_user" value="user" required>
                         <input type="hidden" name="entreprise_id" value="" required>
@@ -50,31 +49,40 @@
                 <form action="{{route('experienceProf')}}" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{$userId}}" required>
-                    <input type="text" name="description" value="" placeholder="description" required>
-                    <input type="date" name="date" value="" placeholder="date d'experience" required>
-
                     <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500" type="text" name="nom_competence_prof" placeholder="experiences" required> <br>
+                    <input type="text" name="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500" value="" placeholder="description" required> <br>
+                    <input type="date" name="date" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100 border-gray-500 placeholder-gray-400 text-black focus:ring-primary-500 focus:border-primary-500" placeholder="date d'experience" required> <br>
                     <button type="submit" name="experienceProf" class="inline-flex items-center focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-6 bg-blue-500 hover:bg-blue-200 focus:ring-gray-800">
                         ajouter
                     </button>
                 </form>
             </div>
-            @foreach ($experiences as $experience)
-            <div class="flex h-screen items-center justify-center bg-white px-6 md:px-60">
-                <div class="space-y-6 border-l-2 border-dashed">
-                  <div class="relative w-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
-                      <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <div class="ml-6">
-                      <h4 class="font-bold text-blue-500">Frontend Development.</h4>
-                      <p class="mt-2 max-w-screen-sm text-sm text-gray-500">{{$experiences->nom_competence_prof}}</p>
-                      <span class="mt-1 block text-sm font-semibold text-blue-500">2007</span>
-                    </div>
-                  </div>
-                </div>
+            <div>
+                <h2 class="text-xl mt-9 font-bold mb-4"> Ajouter voter experiences </h2>
             </div>
-            @endforeach
+            <a href="{{route('invoice.generate')}}">pdf</a>
+            @if(isset($experiences))
+                @foreach ($experiences as $experience)
+                    <div class="space-y-6 mt-10 border-l-2 border-dashed">
+                    <div class="relative w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
+                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                        </svg>
+                        <div class="ml-6">
+                        <h4 class="font-bold text-blue-500">{{$experience->nom_competence_prof}}</h4>
+                        <p class="mt-2 max-w-screen-sm text-sm text-gray-500">{{$experience->description}}</p>
+                        <span class="mt-1 block text-sm font-semibold text-blue-500">{{$experience->date}}</span>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                
+            @else
+            <div class="flex h-screen items-center justify-center bg-white px-6 md:px-60">
+                <p> Ajouter voter experiences profitionnel</p>
+            </div>
+            @endif
+            
 
             <div>
             </div>
@@ -85,7 +93,7 @@
                 <img class="w-full h-48 rounded-md object-cover" src="{{ asset('' . $user->background) }}" alt="Photo profile">
                 <img class="w-40 h-40 mx-auto rounded-full -mt-20 border-8 border-white" src="{{ asset('' . $user->photo) }}" alt="Photo profile">
                 
-                <form class="p-4 md:p-5" action="{{route('up')}}" method="post">
+                <form class="p-4 md:p-5" action="{{route('up')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                     <div class="grid gap-4 mb-4 grid-cols-2">
