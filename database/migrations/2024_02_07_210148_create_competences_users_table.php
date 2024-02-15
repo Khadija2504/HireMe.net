@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('competences_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->constrained('users')->nullable();
-            $table->foreignId('entreprise_id')->constrained('entreprises')->nullable();
-            $table->enum('type_user',['user','entreprise']);
+            $table->foreignId('offre_demploi_id')->constrained('offre_demplois')->nullable();
+            $table->enum('type_user',['user','offre_demplois']);
             $table->foreignId('competences_id')->constrained('competences');
             $table->timestamps();
         });

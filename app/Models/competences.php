@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class competences extends Model
 {
@@ -11,8 +12,9 @@ class competences extends Model
     protected $fillable = [
         'nom_competence',                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     ];
-    public function offresDemploi()
+    
+    public function competences(): HasMany
     {
-        return $this->belongsToMany(OffreDemplois::class, 'offre_demploi_competences', 'competences_id', 'offre_demploi_id');
+        return $this->hasMany(competences::class);
     }
 }

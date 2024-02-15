@@ -5,20 +5,12 @@
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <meta name="google" content="notranslate">
-    <meta name="og:title" content="Home page — Manchester Centre for Plastic Surgery & Burns">
-    <meta name="og:description" content="The Manchester Centre for Plastic Surgery and Burns provides specialist care to the population of Greater Manchester and is the major tertiary referral centre for complex reconstruction in the North West of England.">
-    <meta name="og:image" content="https://mcrplasticsurgeryandburns.co.uk/cfpsb.png">
-    <meta name="description" content="The Manchester Centre for Plastic Surgery and Burns provides specialist care to the population of Greater Manchester and is the major tertiary referral centre for complex reconstruction in the North West of England.">
-    <meta name="keywords" content="Manchester Centre for Plastic Surgery, Burns, specialist care, reconstruction, Greater Manchester, North West of England">
-    <meta name="author" content="Manchester University NHS Foundation Trust">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#005eb8">
     <meta name="msapplication-navbutton-color" content="#005eb8">
     <meta name="apple-mobile-web-app-status-bar-style" content="#005eb8">
     <meta name="msapplication-TileColor" content="#005eb8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page — Manchester Centre for Plastic Surgery & Burns</title>
+    <title>HireMe.net</title>
     <!-- Add Tailwind CSS -->
     
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>

@@ -33,5 +33,20 @@ class CompetencesController extends Controller
         return redirect()->back()->with('success', 'Competences created successfully');
     }
 
+    public function addSkills(competences_userRequest $request){
+        $validatedRequests = $request->validated();
+        // dd($request);
+        $competenceIds = $validatedRequests['competences_id'];
+        $offre_demploi_id = $validatedRequests['offre_demploi_id'];
+        $type = $validatedRequests['type_user'];
+        $createdCompetences = [];
+        
+        foreach ($competenceIds as $competenceId) {
+            $create = competences_user::create(['competences_id' => $competenceId, 'offre_demploi_id' => $offre_demploi_id, 'type_user' => $type]);
+            $createdCompetences[] = $create;
+        }
+        return back();
+    }
+
     
 }

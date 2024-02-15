@@ -13,11 +13,10 @@ class LanguesMaitriseesController extends Controller
         $validatedRequests = $request->validated();
         $competenceIds = $validatedRequests['langues_maitrisees_id'];
         $user_id = $validatedRequests['users_id'];
-        $type = $validatedRequests['type_user'];
         $createdCompetences = [];
         
         foreach ($competenceIds as $competenceId) {
-            $create = langues_maitrisees_user::create(['langues_maitrisees_id' => $competenceId, 'users_id' => $user_id, 'type_user' => $type]);
+            $create = langues_maitrisees_user::create(['langues_maitrisees_id' => $competenceId, 'users_id' => $user_id]);
             $createdCompetences[] = $create;
         }
         // dd($createdCompetences);

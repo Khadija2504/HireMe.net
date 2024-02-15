@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\competences;
+use App\Models\competences_user;
 use App\Models\entreprises;
 use App\Models\OffreDemplois;
 use App\Models\post;
@@ -32,8 +34,12 @@ class PostController extends Controller
         $entreprise = entreprises::find($entreprisesId);
         $users = User::where('id', $userId)->get();
         $user = user::find($userId);
+        $offreCompetence = competences_user::with('competenceProv')->where('offre_demploi_id', $id)->get();
+            // foreach($offre as $offer){
+            //     dd($offer->competenceProv->nom_competence);
+            // }
         $posts = post::with('users')->orderBy('updated_at', 'desc')->get();
-        $offer = OffreDemplois::with('entreprises')->find($id);
-        return view("offres_d'emploi.dispalyPosts", compact('posts','user', 'users', 'offer', 'entreprises', 'entreprise'));
+        $offre = OffreDemplois::with('entreprises')->find($id);
+        return view("offres_d'emploi.dispalyPosts", compact('posts','user', 'users', 'offre', 'offreCompetence', 'entreprises', 'entreprise'));
     }
 }

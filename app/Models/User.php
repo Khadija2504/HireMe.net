@@ -58,4 +58,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(post::class);
     }
+
+    public function langues_maitrisees(){
+        return $this->belongsToMany(langues_maitrisees::class, 'langues_maitrisees_user.id','users_id', 'langues_maitrisees_id');
+    }
 }

@@ -10,7 +10,10 @@ class langues_maitrisees_user extends Model
     use HasFactory;
     protected $fillable = [
         'users_id',
-        'type_user',
         'langues_maitrisees_id',
     ];
+
+    public function langues_maitrise(){
+        return $this->belongsTo(langues_maitrisees::class, 'langues_maitrisees_id');
+    }
 }

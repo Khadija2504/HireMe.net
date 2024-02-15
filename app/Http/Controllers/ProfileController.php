@@ -6,9 +6,13 @@ use App\Http\Requests\Auth\registerUserRequest;
 use App\Http\Requests\ProfileUpCompanyRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\competences;
+use App\Models\competences_user;
+use App\Models\cursus_educatifs;
+use App\Models\cursus_educatifs_user;
 use App\Models\entreprises;
 use App\Models\experiences_proves;
 use App\Models\langues_maitrisees;
+use App\Models\langues_maitrisees_user;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,8 +49,15 @@ class ProfileController extends Controller
             $user = user::find($userId);
             $competences = competences::all();
             $langues_maitrisees = langues_maitrisees::all();
+            $myLangues = langues_maitrisees_user::with('langues_maitrise')->where('users_id', $userId)->get();
+            $competenceUser = competences_user::with('competenceProv')->where('users_id', $userId)->get();
+            
+            // dd($myLangues->langues_maitrisees->nom_langues_maitrisees);
+            // $cursus_educatifss = cursus_educatifs_user::with('cursus_educatifs')->where('users_id', $userId)->get();
             $experiences = experiences_proves::where('user_id', $userId)->orderBy('date', 'desc')->get();
-            return view('profile.editUser',compact('users','user','competences', 'userId', 'langues_maitrisees', 'experiences'));
+            $cursus_educatif = cursus_educatifs::where('user_id', $userId)->orderBy('date', 'desc')->get();
+            // dd($cursus_educatifss);
+            return view('profile.editUser',compact('users','user','competences', 'competenceUser', 'userId', 'langues_maitrisees', 'experiences', 'cursus_educatif', 'myLangues'));
     }
     public function up(ProfileUpdateRequest $request){
         $validated = $request->validated();
@@ -103,6 +114,39 @@ class ProfileController extends Controller
         // dd($entrepriseData);
 
         return redirect()->back();
+    }
+
+    public function visitUser($id){
+        if (Auth::guard('entreprise')->check()) {
+            session(['company_id' => Auth::guard('entreprise')->id()]);
+        
+            $entreprisesId = session('company_id');
+            if(!isset($entreprisesId)){
+                
+                return redirect()->route('login_form');
+            }
+            $entreprises = entreprises::where('id', $entreprisesId)->get();
+            $entreprise = entreprises::find($entreprisesId);
+            $userResult = user::where('id', $id)->get();
+            $myLangues = langues_maitrisees_user::with('langues_maitrise')->where('users_id', $id)->get();
+            $competenceUser = competences_user::with('competenceProv')->where('users_id', $id)->get();
+            $experiences = experiences_proves::where('user_id', $id)->orderBy('date', 'desc')->get();
+            $cursus_educatif = cursus_educatifs::where('user_id', $id)->orderBy('date', 'desc')->get();
+            return view('profile.visitUser', compact('myLangues', 'experiences', 'cursus_educatif', 'competenceUser', 'userResult', 'entreprise', 'entreprises'));
+        }elseif(!Auth::guard('entreprise')->check()){
+            $userId = session('user_id');
+            if(!isset($userId)){
+                return redirect()->route('login_form');
+            }
+            $users = User::where('id', $userId)->get();
+            $user = user::find($userId);
+            $userResult = user::where('id', $id)->get();
+            $myLangues = langues_maitrisees_user::with('langues_maitrise')->where('users_id', $id)->get();
+            $competenceUser = competences_user::with('competenceProv')->where('users_id', $id)->get();
+            $experiences = experiences_proves::where('user_id', $id)->orderBy('date', 'desc')->get();
+            $cursus_educatif = cursus_educatifs::where('user_id', $id)->orderBy('date', 'desc')->get();
+        return view('profile.visitUser', compact('myLangues', 'experiences', 'cursus_educatif', 'competenceUser', 'userResult', 'user', 'users'));
+        }
     }
  
     /**

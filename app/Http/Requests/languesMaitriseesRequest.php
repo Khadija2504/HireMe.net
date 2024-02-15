@@ -25,7 +25,6 @@ class languesMaitriseesRequest extends FormRequest
     {
         return [
             'users_id' => '',
-            'type_user' => '',
             'langues_maitrisees_id' => '',
         ];
     }

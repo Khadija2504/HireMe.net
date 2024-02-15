@@ -10,6 +10,7 @@ use App\Http\Controllers\LanguesMaitriseesController;
 use App\Http\Controllers\OffreDemploisController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\cursus_educatifs;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,11 +52,17 @@ Route::prefix('entreprise')->group(function(){
     Route::post('/company/offer/create',[OffreDemploisController::class,'addOffer'])
     ->name('addOffer');
 
+    Route::post('/company/offre/addSkills',[CompetencesController::class,'addSkills'])
+    ->name('addSkills');
+
     Route::get('/company/offer/display',[OffreDemploisController::class,'displayOffreDemplois'])
     ->name('displayOffreDemplois');
 
     Route::put('/company/profile/up',[ProfileController::class,'upCompany'])
     ->name('upCompany');
+
+    Route::get('/company/visitUser{id}', [ProfileController::class , 'visitUser'])
+    ->name('visitUser');
 
 });
 
@@ -81,9 +88,6 @@ Route::prefix('auth')->group(function () {
 
     Route::put('/user/profile/up',[ProfileController::class,'up'])
     ->name('up');
-    
-    Route::post('/createCursure',[CursusEducatifsController::class,'createCursure'])
-    ->name('createCursure');
 
     Route::post('/user/competences/create',[CompetencesController::class,'competencesCreate'])
     ->name('competencesCreate');
@@ -97,11 +101,20 @@ Route::prefix('auth')->group(function () {
     Route::get('/user/postForm{id}',[PostController::class, 'postForm'])
     ->name('postForm');
 
+    Route::post('/user/cursusEducatifs/create', [CursusEducatifsController::class, 'cursusEducatifs'])
+    ->name('cursusEducatifs');
+
     Route::post('/user/post', [PostController::class,'post'])
     ->name('post');
 
     Route::get('/user/dispalyPosts{id}',[PostController::class, 'dispaly'])
     ->name('dispalyPosts');
+
+    Route::post('/user/search',[OffreDemploisController::class, 'search'])
+    ->name('search');
+
+    Route::get('/user/companyOffers', [OffreDemploisController::class, 'companyOffers'])
+    ->name('companyOffers');
 
     Route::post('/user/experiences/create',[ExperiencesProvesController::class,'experienceProf'])
     ->name('experienceProf');
