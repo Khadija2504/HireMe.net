@@ -11,6 +11,7 @@ use App\Http\Controllers\OffreDemploisController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\SubscriptionController;
 use App\Models\cursus_educatifs;
 use Illuminate\Support\Facades\Route;
 
@@ -125,6 +126,9 @@ Route::prefix('auth')->group(function () {
 
     Route::post('/user/experiences/create',[ExperiencesProvesController::class,'experienceProf'])
     ->name('experienceProf');
+
+    Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe.post');
+
 
     // Route::get('/user/update/detailsPopup', [ProfileController::class, 'detailsPopup'])
     // ->name('detailsPopup');
