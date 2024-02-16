@@ -10,6 +10,7 @@ use App\Http\Controllers\LanguesMaitriseesController;
 use App\Http\Controllers\OffreDemploisController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatisticsController;
 use App\Models\cursus_educatifs;
 use Illuminate\Support\Facades\Route;
 
@@ -64,10 +65,16 @@ Route::prefix('entreprise')->group(function(){
     Route::get('/company/visitUser{id}', [ProfileController::class , 'visitUser'])
     ->name('visitUser');
 
+    Route::get('/company/visitCompany{id}', [ProfileController::class , 'visitCompany'])
+    ->name('visitCompany');
+
 });
 
 
 /* ------ company's routes end -------*/
+
+/* ------ user's route start -------*/
+
 
 Route::prefix('auth')->group(function () {
 
@@ -118,6 +125,38 @@ Route::prefix('auth')->group(function () {
 
     Route::post('/user/experiences/create',[ExperiencesProvesController::class,'experienceProf'])
     ->name('experienceProf');
+
+    // Route::get('/user/update/detailsPopup', [ProfileController::class, 'detailsPopup'])
+    // ->name('detailsPopup');
+
+    // Route::post('/user/update/detailsCV', [ProfileController::class, 'updateDetailsCV'])
+    // ->name('updateDetailsCV');
+
+});
+
+/* ------ user's routes end -------*/
+
+/* ------ admins's routes end -------*/
+
+Route::prefix('auth')->group(function () {
+
+    Route::get('/admin/dashboard',[AuthenticatedSessionController::class,'dashboardUser'])
+    ->name('admin.dashboard')->middleware('auth');
+
+    Route::get('/admin/profile/update', [ProfileController::class, 'updateProfileAdmin'])
+    ->name('updateProfileAdmin');
+
+    Route::get('/admin/statistics', [StatisticsController::class, 'statistics'])
+    ->name('statistics');
+
+    Route::delete('/admin/offreDemploi/delete{id}', [OffreDemploisController::class, 'deleteOffreDemploi'])
+    ->name('deleteOffreDemploi');
+
+    Route::delete('/admin/user/delete{id}',[ProfileController::class, 'deleteUser'])
+    ->name('deleteUser');
+
+    Route::delete('/admin/company/delete{id}', [EntreprisesController::class, 'deleteCompany'])
+    ->name('deleteCompany');
 
 });
 

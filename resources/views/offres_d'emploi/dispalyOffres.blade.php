@@ -12,13 +12,28 @@
                 <p class="text-gray-700 mb-4">{{$offreDemploi->description}} <br>
                     Create at : {{$offreDemploi->created_at}} <br>
                     Updated at : {{$offreDemploi->updated_at}} <br>
-                    by : {{$offreDemploi->entreprises->nom}}
+                    <form action="{{route('visitCompany', $offreDemploi->entreprises->id)}}" method="GET">
+                        <button>  
+                        <p>by : {{$offreDemploi->entreprises->nom}}</p>
+                        </button>
+                    </form>
                 </p>
                 @if (!Auth::guard('entreprise')->check() && Auth::user()->role == 'user')
                     <div class="mt-8">
                         <form class="inline" action="{{route('postForm',$offreDemploi->id)}}" method="GET">
+                            @csrf
                             <button class="inline-block px-6 py-3 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-600 transition duration-300">
                                 Contact
+                            </button>
+                        </form>
+                    </div>
+                @elseif (!Auth::guard('entreprise')->check() && Auth::user()->role == 'admin')
+                    <div class="mt-8">
+                        <form class="inline" action="{{route('deleteOffreDemploi',$offreDemploi->id)}}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <button class="inline-block px-6 py-3 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-600 transition duration-300">
+                                Delete
                             </button>
                         </form>
                     </div>

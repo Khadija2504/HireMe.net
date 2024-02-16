@@ -43,7 +43,8 @@ class AuthenticatedSessionController extends Controller
             }
             $users = user::where('id', $userId)->get();
             $user = user::find($userId);
-        return view('home', compact('users','user'));
+            $admin = user::find($userId);
+        return view('home', compact('users','user', 'admin'));
     }
 
     /**
@@ -57,7 +58,7 @@ class AuthenticatedSessionController extends Controller
         if(Auth::user()->role == 'user') {
             return redirect()->route('user.dashboard');
         }else {
-            return redirect()->route('welcome');
+            return redirect()->route('admin.dashboard');
         }
         
     }

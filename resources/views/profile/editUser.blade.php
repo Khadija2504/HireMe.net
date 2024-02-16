@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('main')
-    <div class="flex flex-row xs:flex-wrap ">
-        <div class="flex items-enter justify-start min-h-screen pt-4 px-4 pb-20 sm:block sm:p-0" style="width: 50%; margin: 5%;">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class=" text-blue-900 rounded-lg p-6 shadow-md">
             <div class="form-container sign-up-container">
                 <h2 class="text-xl font-bold mb-4"> Ajouter votre competences </h2>
                 
@@ -192,11 +192,10 @@
  
         </div>
 
-        <div class="flex items-center justify-start min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" style="width: 50%; margin: 5%;">
+        <div class="flex items-center justify-start min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" >
             <div class="form-container sign-up-container">
                 <img class="w-full h-48 rounded-md object-cover" src="{{ asset('' . $user->background) }}" alt="Photo profile">
                 <img class="w-40 h-40 mx-auto rounded-full -mt-20 border-8 border-white" src="{{ asset('' . $user->photo) }}" alt="Photo profile">
-                
                 <form class="p-4 md:p-5" action="{{route('up')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

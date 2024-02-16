@@ -105,6 +105,20 @@
                 <p> Ajouter votre competences</p>
             </div>
             @endif
+
+            @if (!Auth::guard('entreprise')->check() && Auth::user()->role == 'admin')
+            <div class="mt-8">
+                @foreach ($userResult as $result)
+                <form class="inline" action="{{route('deleteUser',$result->id)}}" method="post">
+                    @csrf
+                    @method("DELETE")
+                    <button class="inline-block px-6 py-3 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-600 transition duration-300">
+                        Delete
+                    </button>
+                </form>
+                @endforeach
+            </div>
+            @endif
         </div>
         <div class="flex items-center justify-start min-h-screen pt-4 px-4 pb-20 sm:block sm:p-0" style="width: 50%; margin: 5%;">
             <div class="form-container sign-up-container">

@@ -51,7 +51,7 @@
                             @if (Auth::user()->role == 'user')
                             <a href="{{route('updateProfileUser')}}"><span class="font-bold">edit</span></a>
                             @elseif(Auth::user()->role == 'admin')
-                            <a href="{{route('updateProfile')}}"><span class="font-bold">edit</span></a>
+                            <a href="{{route('updateProfileAdmin')}}"><span class="font-bold">edit</span></a>
                             @endif
                         @endif
                     </div>

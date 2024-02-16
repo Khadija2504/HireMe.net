@@ -73,7 +73,7 @@ class EntreprisesController extends Controller
             $entreprises = entreprises::where('id', $entreprisesId)->get();
             $entreprise = entreprises::find($entreprisesId);
             $competences = competences::all();
-            $offreDemplois = OffreDemplois::find($entreprisesId)->orderBy('updated_at', 'desc')->get();
+            $offreDemplois = OffreDemplois::where('id_entreprise', $entreprisesId)->orderBy('updated_at', 'desc')->get();
 
             return view('profile.edit',compact('entreprise','entreprises','competences', 'offreDemplois'));
     }
@@ -103,6 +103,14 @@ class EntreprisesController extends Controller
     entreprises::create($validated);                                                   
     
     return redirect()->route('login');
+}
+
+public function deleteCompany($id){
+    $entreprise = entreprises::where('id' ,$id);
+    $offreDemplois = OffreDemplois::where('id_entreprise', $id);
+    $entreprise->delete();
+    $offreDemplois->delete();
+    return redirect()->route('admin.dashboard');
 }
 
 }

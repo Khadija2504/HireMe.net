@@ -23,9 +23,9 @@ class InvoiceController extends Controller
             $user = user::find($userId);
             $experiences = experiences_proves::where('user_id', $userId)->orderBy('date', 'desc')->get();
 
-        // $pdf = Pdf::loadView('invoice', compact('users','user', 'experiences'));
+        $pdf = Pdf::loadView('invoice', compact('users','user', 'experiences'));
 
-        return view('invoice', compact('users','user', 'experiences'));
-        // return $pdf->download('invoice.pdf');
+        // return view('invoice', compact('users','user', 'experiences'));
+        return $pdf->download('invoice.pdf');
     }
 }

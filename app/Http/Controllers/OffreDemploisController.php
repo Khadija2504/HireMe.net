@@ -61,7 +61,8 @@ class OffreDemploisController extends Controller
             $offreDemplois = OffreDemplois::with('entreprises')->orderBy('updated_at')->get();
             $users = User::where('id', $userId)->get();
             $user = user::find($userId);
-            return view("offres_d'emploi.dispalyOffres",compact('user', 'users', 'offreDemplois'));
+            $admin = User::find($userId);
+            return view("offres_d'emploi.dispalyOffres",compact('user', 'users', 'offreDemplois', 'admin'));
         }
     }
 
@@ -88,7 +89,7 @@ class OffreDemploisController extends Controller
             }
             return view('partials.resultSearch', compact('entreprise','entreprises', 'competences', 'entreprisesId', 'offreEntreprise', 'entrepriseResult'))->with('offreDemplois', $offreSearch);
 
-        }elseif(!Auth::guard('entreprise')->check()){
+        }else if(!Auth::guard('entreprise')->check()){
             $userId = session('user_id');
             if(!isset($userId)){
                 return redirect()->route('login_form');
@@ -99,18 +100,23 @@ class OffreDemploisController extends Controller
             $search = $request->input('search');
             $offreSearch = OffreDemplois::where('titre', 'like', "%$search%")->orWhere('type', 'like', "%$search%")->get();
             $entrepriseResult = entreprises::where('nom', 'like', "%$search%")->get();
-            dd($entrepriseResult);
-            if(isset($entrepriseResult)){
+            if(!empty($entrepriseResult)){
                 foreach($entrepriseResult as $entrepriseResults){
-                    $idEntreprise = $entrepriseResults->id;
+                    if(isset($entrepriseResults->id)){
+                        $idEntreprise = $entrepriseResults->id;
+                        $offreEntreprise = OffreDemplois::find($idEntreprise)->get();
+                        // dd($offreEntreprise);
+                        return view('partials.resultSearch', compact('user', 'users', 'offreEntreprise', 'entrepriseResult'))->with('offreDemplois', $offreSearch);
+                    }
                 }
             }
-            $offreEntreprise = OffreDemplois::find($idEntreprise)->get();  
-        return view('partials.resultSearch', compact('user', 'users', 'offreEntreprise', 'entrepriseResult'))->with('offreDemplois', $offreSearch);
+        return view('partials.resultSearch', compact('user', 'users', 'entrepriseResult'))->with('offreDemplois', $offreSearch);
         }
     }
-    public function companyOffers(){
-
+    public function deleteOffreDemploi($id){
+        $offreDemploi = OffreDemplois::where('id', $id);
+        $offreDemploi->delete();
+        return back();
     }
     public function deleteOffer(OffreDemplois $offreDemplois){
         $offreDemplois->delete();

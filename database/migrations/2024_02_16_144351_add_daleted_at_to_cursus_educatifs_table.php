@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cursus_educatifs_users', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('users_id')->constrained('users')->nullable();
-            $table->foreignId('cursus_educatifs_id')->constrained('cursus_educatifs');
-            $table->timestamps();
+        Schema::table('cursus_educatifs', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cursus_educatifs_users');
+        Schema::table('cursus_educatifs', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 };

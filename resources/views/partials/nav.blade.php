@@ -108,18 +108,16 @@
                 <ul class="flex justify-center text-white">
                     <li class="mr-6"><a href="/home">Home</a></li>
                     <li class="mr-6"><a href="/news">News</a></li>
-                    <li class="mr-6"><a href="/services">Our services</a></li>
+                    <li class="mr-6"><a href="{{route('displayOffreDemplois')}}">All jobs</a></li>
                     <li class="mr-6"><a href="/locations">Our locations</a></li>
                     <li class="mr-6"><a href="/team">Our team</a></li>
-                    <div x-data="{ open: false }">
-                    <li class="mr-6"><a href="#" @click="open = true" class=""> Ajouter service</a></li>
-                    </div>
+                    <li class="mr-6"><a href="{{route('statistics')}}">Statistics</a></li>
                     <li class="mr-6"><a href="/myService">votre services</a></li> {{-- as ->popup --}}
                     <div x-data="{ open: false }">
                         <li class="mr-6"><a href="#" @click="open = true" class="">Profile</a></li>
                         @include('components.profile')
                     </div>
-                    <li class="mr-6"><a href="{{route('company.logout')}}">Logout</a></li>
+                    <li class="mr-6"><a href="{{route('user.logout')}}">Logout</a></li>
                 </ul>
             </div>
         </nav>

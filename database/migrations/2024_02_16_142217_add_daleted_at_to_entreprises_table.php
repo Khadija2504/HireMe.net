@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('experiences_proves_users', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('users_id')->constrained('users')->nullable();
-            $table->foreignId('experiences_proves_id')->constrained('experiences_proves');
-            $table->timestamps();
+        Schema::table('entreprises', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('experiences_proves_users');
+        Schema::table('entreprises', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 };
