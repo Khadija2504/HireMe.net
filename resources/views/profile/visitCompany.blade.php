@@ -82,7 +82,7 @@
                 
             @else
             <div class="flex h-screen items-center justify-center bg-white px-6 md:px-60">
-                <p> ajouter votre premier offre d'emploi</p>
+                <p> Aucune offre d'emploi</p>
             </div>
             @endif
         </div>

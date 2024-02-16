@@ -5,7 +5,6 @@
                 <div>
                     <h2 class="text-xl mt-9 font-bold mb-4"> Experiences </h2>
                 </div>
-            <a href="{{route('invoice.generate')}}">pdf</a>
             @if(isset($experiences))
                 @foreach ($experiences as $experience)
 
@@ -118,6 +117,11 @@
                 </form>
                 @endforeach
             </div>
+            <div class="mt-8">
+                <button class="inline-block px-6 py-3 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-600 transition duration-300">
+                   <a href="{{route('invoice.generate')}}">pdf</a>
+                </button>
+        </div>
             @endif
         </div>
         <div class="flex items-center justify-start min-h-screen pt-4 px-4 pb-20 sm:block sm:p-0" style="width: 50%; margin: 5%;">
